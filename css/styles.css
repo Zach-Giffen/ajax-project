@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  background-color: rgb(255, 0, 0);
+  width: 100%;
+  justify-content: space-between;
+}
+
+.headerText {
+  rotate: -30deg;
+  text-align: center;
+}
+
+.pokedex-img {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
+.pokeballHeader {
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.filter-button-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-button {
+  border-radius: 10%;
+  border: 1px solid;
+}
+
+.pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.pokedex-table {
+  width: 100%;
+  border-collapse: collapse;
+}

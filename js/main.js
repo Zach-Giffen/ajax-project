@@ -6,7 +6,6 @@ function getAllPokemonData(callback) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       const responseData = xhr.response;
-      // console.log(responseData); // Log the response
       callback(responseData.results);
     } else {
       console.error('Request failed with status:', xhr.status);
@@ -28,7 +27,6 @@ function getAllPokemonNames(pokemonName, callback) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       const responseData = xhr.response;
-      // console.log(responseData); // Log the response
       callback(responseData);
     } else {
       console.error('Request failed with status:', xhr.status);
@@ -61,6 +59,7 @@ function renderTable(pokemon) {
 
   const $tableDataName = document.createElement('td');
   $tableDataName.textContent = pokemon.name;
+  $tableDataName.className = 'table-name';
   $tableRow.appendChild($tableDataName);
 
   const $tableDataDexNo = document.createElement('td');
@@ -69,7 +68,7 @@ function renderTable(pokemon) {
 
   const $tableDataType1 = document.createElement('td');
   const $typeBox1 = document.createElement('div');
-  $typeBox1.className = 'type-box';
+  $typeBox1.className = 'type-box1';
   $typeBox1.textContent = pokemon.types[0].type.name;
   if ($typeBox1.textContent === 'grass') {
     $typeBox1.classList.add('grass');
@@ -105,18 +104,16 @@ function renderTable(pokemon) {
     $typeBox1.classList.add('dark');
   } else if ($typeBox1.textContent === 'steel') {
     $typeBox1.classList.add('steel');
-  } else $typeBox1.textContent === null;
-  $typeBox1.classList.add('???');
+  }
   $tableDataType1.appendChild($typeBox1);
   $tableRow.appendChild($tableDataType1);
 
   const $tableDataType2 = document.createElement('td');
   const $typeBox2 = document.createElement('div');
-  $typeBox2.className = 'type-box';
+  $typeBox2.className = 'type-box2';
   if (pokemon.types[1]) {
     $typeBox2.textContent = pokemon.types[1].type.name;
   } else {
-    // If it doesn't exist, use the type from pokemon.types[0]
     $typeBox2.textContent = pokemon.types[0].type.name;
   }
   if ($typeBox2.textContent === 'grass') {
@@ -153,8 +150,7 @@ function renderTable(pokemon) {
     $typeBox2.classList.add('dark');
   } else if ($typeBox2.textContent === 'steel') {
     $typeBox2.classList.add('steel');
-  } else $typeBox2.textContent === null;
-  $typeBox2.classList.add('???');
+  }
   $tableDataType2.appendChild($typeBox2);
   $tableRow.appendChild($tableDataType2);
 
@@ -235,6 +231,7 @@ function renderTable(pokemon) {
   $tableDataSpeed.textContent = pokemon.stats[5].base_stat;
   $tableRow.appendChild($tableDataSpeed);
 
+  $tableRow.setAttribute('data-region', pokemon.game_indices[0].version.name);
   return $tableRow;
 }
 
@@ -249,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const requestPromise = new Promise((resolve) => {
         getAllPokemonNames(pokemonName, function (pokemonDetails) {
           resolve({
-            order: i, // Keep track of the order
+            order: i,
             details: pokemonDetails,
           });
         });
@@ -258,13 +255,10 @@ document.addEventListener('DOMContentLoaded', function () {
       requests.push(requestPromise);
     }
 
-    // Wait for all requests to complete
     Promise.all(requests)
       .then((responses) => {
-        // Sort the responses based on the order
         const sortedResponses = responses.sort((a, b) => a.order - b.order);
 
-        // Render the sorted responses
         sortedResponses.forEach((response) => {
           pokedexTable.appendChild(renderTable(response.details));
         });
@@ -274,3 +268,38 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
+
+const $regionSelect = document.getElementById('region');
+const $filterButton = document.querySelector('.filter-button');
+const $type1Select = document.getElementById('type-1');
+const $type2Select = document.getElementById('type-2');
+
+function filter() {
+  const selectedRegion = $regionSelect.value;
+  const selectedType1 = $type1Select.value;
+  const selectedType2 = $type2Select.value;
+  const rows = pokedexTable.getElementsByTagName('tr');
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const regionData = row.getAttribute('data-region');
+    const typeBox1 = row.querySelector('.type-box1');
+    const typeBox2 = row.querySelector('.type-box2');
+    if (
+      regionData === 'always' ||
+      ((regionData === selectedRegion || selectedRegion === 'all') &&
+        (typeBox1.classList.contains(selectedType1) ||
+          typeBox2.classList.contains(selectedType1) ||
+          selectedType1 === 'all') &&
+        (typeBox1.classList.contains(selectedType2) ||
+          typeBox2.classList.contains(selectedType2) ||
+          selectedType2 === 'all'))
+    ) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  }
+}
+
+$filterButton.addEventListener('click', filter);

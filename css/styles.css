@@ -51,7 +51,8 @@
   border-collapse: collapse;
 }
 
-.type-box {
+.type-box1,
+.type-box2 {
   border-radius: 20px;
   text-align: center;
   color: white;

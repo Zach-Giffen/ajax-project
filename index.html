@@ -25,18 +25,66 @@
       <form>
         <div class="form">
           <select name="region" id="region">
-            <option value="null">Region</option>
+            <option value="all" style="display: none">Region</option>
+            <option value="all">All Regions</option>
+            <option value="red">Kanto</option>
+            <option value="gold">Johto</option>
+            <option value="ruby">Hoenn</option>
+            <option value="diamond">Sinnoh</option>
+            <option value="black">Unova</option>
           </select>
           <select name="type 1" id="type-1">
-            <option value="null">Type 1</option>
+            <option value="all" style="display: none">Type 1</option>
+            <option value="all">All Types</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="fighting">Fighting</option>
+            <option value="water">Water</option>
+            <option value="flying">Flying</option>
+            <option value="grass">Grass</option>
+            <option value="poison">Poison</option>
+            <option value="electric">Electric</option>
+            <option value="ground">Ground</option>
+            <option value="psychic">Psychic</option>
+            <option value="rock">Rock</option>
+            <option value="ice">Ice</option>
+            <option value="bug">Bug</option>
+            <option value="dragon">Dragon</option>
+            <option value="ghost">Ghost</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
           </select>
           <select name="type 2" id="type-2">
-            <option value="null">Type 2</option>
+            <option value="all" style="display: none">Type 2</option>
+            <option value="all">All types</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="fighting">Fighting</option>
+            <option value="water">Water</option>
+            <option value="flying">Flying</option>
+            <option value="grass">Grass</option>
+            <option value="poison">Poison</option>
+            <option value="electric">Electric</option>
+            <option value="ground">Ground</option>
+            <option value="psychic">Psychic</option>
+            <option value="rock">Rock</option>
+            <option value="ice">Ice</option>
+            <option value="bug">Bug</option>
+            <option value="dragon">Dragon</option>
+            <option value="ghost">Ghost</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
           </select>
-          <select name="highest stat" id="highest-stat">
+          <!-- <select name="highest stat" id="highest-stat">
             <option value="null">Highest Stat</option>
-          </select>
-          <input
+            <option value="hp">HP</option>
+            <option value="attack">Attack</option>
+            <option value="defense">Defense</option>
+            <option value="sp-attack">Sp. Attack</option>
+            <option value="sp-defense">Sp. Defense</option>
+            <option value="speed">Speed</option>
+          </select> -->
+          <!-- <input
             type="checkbox"
             id="legendaries"
             name="legendaries"
@@ -47,7 +95,7 @@
             id="mythicals"
             name="mythicals"
             value="mythicals" />
-          <label for="mythicals">Show Mythicals?</label>
+          <label for="mythicals">Show Mythicals?</label> -->
         </div>
         <div class="filter-button-container">
           <button class="filter-button" type="button">Filter</button>
@@ -55,7 +103,7 @@
       </form>
       <div class="pokedex">
         <table class="pokedex-table">
-          <tr>
+          <tr data-region="always">
             <th>Add</th>
             <th>Sprite</th>
             <th>Name</th>

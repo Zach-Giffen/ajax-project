@@ -1,20 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <img class="pokedex-img" src="images/pokedex.webp" />
+        <h1 class="headerText">
+          Pok&eacute;mon<br />
+          Team<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builder
+        </h1>
+        <img class="pokeballHeader" src="images/pokeball.png" />
+      </div>
+    </header>
+    <main>
+      <form>
+        <div class="form">
+          <select name="region" id="region">
+            <option value="all" style="display: none">Region</option>
+            <option value="all">All Regions</option>
+            <option value="red">Kanto</option>
+            <option value="gold">Johto</option>
+            <option value="ruby">Hoenn</option>
+            <option value="diamond">Sinnoh</option>
+            <option value="black">Unova</option>
+          </select>
+          <select name="type 1" id="type-1">
+            <option value="all" style="display: none">Type 1</option>
+            <option value="all">All Types</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="fighting">Fighting</option>
+            <option value="water">Water</option>
+            <option value="flying">Flying</option>
+            <option value="grass">Grass</option>
+            <option value="poison">Poison</option>
+            <option value="electric">Electric</option>
+            <option value="ground">Ground</option>
+            <option value="psychic">Psychic</option>
+            <option value="rock">Rock</option>
+            <option value="ice">Ice</option>
+            <option value="bug">Bug</option>
+            <option value="dragon">Dragon</option>
+            <option value="ghost">Ghost</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
+          </select>
+          <select name="type 2" id="type-2">
+            <option value="all" style="display: none">Type 2</option>
+            <option value="all">All types</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="fighting">Fighting</option>
+            <option value="water">Water</option>
+            <option value="flying">Flying</option>
+            <option value="grass">Grass</option>
+            <option value="poison">Poison</option>
+            <option value="electric">Electric</option>
+            <option value="ground">Ground</option>
+            <option value="psychic">Psychic</option>
+            <option value="rock">Rock</option>
+            <option value="ice">Ice</option>
+            <option value="bug">Bug</option>
+            <option value="dragon">Dragon</option>
+            <option value="ghost">Ghost</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
+          </select>
+          <!-- <select name="highest stat" id="highest-stat">
+            <option value="null">Highest Stat</option>
+            <option value="hp">HP</option>
+            <option value="attack">Attack</option>
+            <option value="defense">Defense</option>
+            <option value="sp-attack">Sp. Attack</option>
+            <option value="sp-defense">Sp. Defense</option>
+            <option value="speed">Speed</option>
+          </select> -->
+          <!-- <input
+            type="checkbox"
+            id="legendaries"
+            name="legendaries"
+            value="legendaries" />
+          <label for="legendaries">Show Legendaries?</label>
+          <input
+            type="checkbox"
+            id="mythicals"
+            name="mythicals"
+            value="mythicals" />
+          <label for="mythicals">Show Mythicals?</label> -->
+        </div>
+        <div class="filter-button-container">
+          <button class="filter-button" type="button">Filter</button>
+        </div>
+      </form>
+      <div class="pokedex">
+        <table class="pokedex-table">
+          <tr data-region="always">
+            <th>Add</th>
+            <th>Sprite</th>
+            <th>Name</th>
+            <th>Dex No.</th>
+            <th>Type 1</th>
+            <th>Type 2</th>
+            <th>HP</th>
+            <th>Attack</th>
+            <th>Defense</th>
+            <th>Sp. Attack</th>
+            <th>Sp. Defense</th>
+            <th>Speed</th>
+          </tr>
+        </table>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

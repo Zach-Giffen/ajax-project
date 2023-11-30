@@ -53,6 +53,7 @@ table {
   border-right: 5px solid black;
   border-left: 5px solid black;
   border-bottom: 5px solid black;
+  width: 100%;
 }
 
 select,
@@ -62,22 +63,30 @@ label {
 }
 
 @media screen and (max-width: 768px) {
-  table {
-    font-size: 10px;
+  main {
+    width: 768px;
   }
 
-  img {
-    height: 30px;
-    width: 30px;
+  header {
+    width: 768px;
+  }
+
+  table,
+  button {
+    font-size: 20px;
+  }
+
+  table .pokeball-dex {
+    width: 40px;
+    height: 40px;
   }
 
   table .type-box1,
   table .type-box2 {
-    height: 15px;
+    height: 25px;
   }
 
-  table .pokeball-dex {
-    height: 25px;
-    width: 25px;
+  select {
+    font-size: 20px;
   }
 }

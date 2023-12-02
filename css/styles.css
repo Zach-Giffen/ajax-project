@@ -229,6 +229,12 @@ td {
   flex-wrap: wrap;
 }
 
+.poke-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .half {
   width: 50%;
 }

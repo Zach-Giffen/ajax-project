@@ -32,153 +32,16 @@
       </form>
       <div class="pokeTeam">
         <div class="row">
-          <div class="poke">
-            <div class="half">
-              <div class="row">
-                <input
-                  class="name"
-                  type="text"
-                  id="name"
-                  name="name"
-                  value="name" />
-                <p class="gender">&#9794;</p>
-                <p class="id">id</p>
-              </div>
-              <div class="row">
-                <div class="half">
-                  <img
-                    class="img"
-                    src="data:image/jpeg;base64,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" />
-                </div>
-                <div class="half">
-                  <select name="attack 1" id="attack1">
-                    <option value="tackle">tackle</option>
-                  </select>
-                  <select name="attack 2" id="attack2">
-                    <option value="tackle">tackle</option>
-                  </select>
-                  <select name="attack 3" id="attack3">
-                    <option value="tackle">tackle</option>
-                  </select>
-                  <select name="attack 4" id="attack4">
-                    <option value="tackle">tackle</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="type-box-1">
-                  <div class="type-box1 grass">grass</div>
-                </div>
-                <div class="type-box-2">
-                  <div class="type-box2 electric">type 2</div>
-                </div>
-              </div>
-              <div class="row">
-                <label class="nature" for="ability">ability:</label>
-                <select name="ability" id="ability">
-                  <option value="static">static</option>
-                </select>
-              </div>
-              <div class="row">
-                <label class="nature" for="nature">nature:</label>
-                <select id="nature" name="nature">
-                  <option value="adamant">Adamant</option>
-                  <option value="bashful">Bashful</option>
-                  <option value="bold">Bold</option>
-                  <option value="brave">Brave</option>
-                  <option value="calm">Calm</option>
-                  <option value="careful">Careful</option>
-                  <option value="docile">docile</option>
-                  <option value="gentle">Gentle</option>
-                  <option value="hardy">Hardy</option>
-                  <option value="hasty">Hasty</option>
-                  <option value="impish">Impish</option>
-                  <option value="jolly">Jolly</option>
-                  <option value="lax">Lax</option>
-                  <option value="lonely">Lonely</option>
-                  <option value="mild">Mild</option>
-                  <option value="modest">Modest</option>
-                  <option value="naive">Naive</option>
-                  <option value="naughty">Naughty</option>
-                  <option value="quiet">Quiet</option>
-                  <option value="quirky">Quirky</option>
-                  <option value="rash">Rash</option>
-                  <option value="relaxed">Relaxed</option>
-                  <option value="sassy">Sassy</option>
-                  <option value="serious">Serious</option>
-                  <option value="timid">Timid</option>
-                </select>
-              </div>
-            </div>
-            <div class="half">
-              <div class="row">
-                <p class="stat">HP</p>
-                <p class="hp-number">20</p>
-                <div class="bar">
-                  <div class="hp-percent"></div>
-                </div>
-              </div>
-              <div class="row">
-                <p class="stat">Attack</p>
-                <p class="att-number">25</p>
-                <div class="bar">
-                  <div class="att-percent"></div>
-                </div>
-              </div>
-              <div class="row">
-                <p class="stat">Defense</p>
-                <p class="def-number">15</p>
-                <div class="bar">
-                  <div class="def-percent"></div>
-                </div>
-              </div>
-              <div class="row">
-                <p class="stat">Sp. Attack</p>
-                <p class="spa-number">23</p>
-                <div class="bar">
-                  <div class="spa-percent"></div>
-                </div>
-              </div>
-              <div class="row">
-                <p class="stat">Sp. Defense</p>
-                <p class="spd-number">155</p>
-                <div class="bar">
-                  <div class="spd-percent"></div>
-                </div>
-              </div>
-              <div class="row">
-                <p class="stat">Speed</p>
-                <p class="spe-number">30</p>
-                <div class="bar">
-                  <div class="spe-percent"></div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <button type="button" class="delete">
-                <u><b>Release</b></u>
-              </button>
-            </div>
-          </div>
-          <div class="poke">
-            <p>This is text for pokemon 2</p>
-          </div>
+          <div class="poke" id="poke1"></div>
+          <div class="poke" id="poke2"></div>
         </div>
         <div class="row">
-          <div class="poke">
-            <p>This is text for pokemon 3</p>
-          </div>
-          <div class="poke">
-            <p>This is text for pokemon 4</p>
-          </div>
+          <div class="poke" id="poke3"></div>
+          <div class="poke" id="poke4"></div>
         </div>
         <div class="row">
-          <div class="poke">
-            <p>This is text for pokemon 5</p>
-          </div>
-          <div class="poke">
-            <p>This is text for pokemon 6</p>
-          </div>
+          <div class="poke" id="poke5"></div>
+          <div class="poke" id="poke6"></div>
         </div>
       </div>
       <div class="modal-box hidden">

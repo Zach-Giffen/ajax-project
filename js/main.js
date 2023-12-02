@@ -351,6 +351,11 @@ function addPokemon() {
         const pokemonInfo = {
           name: pokemonDetails.name,
           id: pokemonDetails.id,
+          abilities: pokemonDetails.abilities,
+          moves: pokemonDetails.moves,
+          sprite: pokemonDetails.sprites.other.dream_world.front_default,
+          types: pokemonDetails.types,
+          stats: pokemonDetails.stats,
           // Add more properties as needed
         };
 

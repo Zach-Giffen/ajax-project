@@ -1,3 +1,1 @@
 /* exported data */
-
-let data = {};

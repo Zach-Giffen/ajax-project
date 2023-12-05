@@ -1,39 +1,4 @@
-// const hpValue = document.querySelector('.hp-number').textContent;
-// const attValue = document.querySelector('.att-number').textContent;
-// const defValue = document.querySelector('.def-number').textContent;
-// const spaValue = document.querySelector('.spa-number').textContent;
-// const spdValue = document.querySelector('.spd-number').textContent;
-// const speValue = document.querySelector('.spe-number').textContent;
-// const maxStat = 255;
-// console.log(speValue);
-// const hpPercent = (hpValue / maxStat) * 100;
-// const attPercent = (attValue / maxStat) * 100;
-// const defPercent = (defValue / maxStat) * 100;
-// const spaPercent = (spaValue / maxStat) * 100;
-// const spdPercent = (spdValue / maxStat) * 100;
-// const spePercent = (speValue / maxStat) * 100;
-// // add *.90 for negatvie natures, and *1.10 for positve natures latern b
-// console.log(spePercent);
-// document.querySelector('.hp-percent').style.width = hpPercent + '%';
-// document.querySelector('.att-percent').style.width = attPercent + '%';
-// document.querySelector('.def-percent').style.width = defPercent + '%';
-// document.querySelector('.spa-percent').style.width = spaPercent + '%';
-// document.querySelector('.spd-percent').style.width = spdPercent + '%';
-// document.querySelector('.spe-percent').style.width = spePercent + '%';
-// console.log(document.querySelector('.spe-percent'));
-
-// const $genderSwitch = document.querySelector('.gender');
-
-// $genderSwitch.addEventListener('click', function () {
-//   if ($genderSwitch.textContent === '♂') {
-//     $genderSwitch.textContent = '♀';
-//   } else {
-//     $genderSwitch.textContent = '♂';
-//   }
-// });
-
 const storedPokemonInfo = JSON.parse(localStorage.getItem('selectedPokemon'));
-console.log(storedPokemonInfo[0].name);
 
 function renderTeam(pokemonInfo) {
   const pokeContainer = document.createElement('div');
@@ -60,7 +25,6 @@ function renderTeam(pokemonInfo) {
   const id = document.createElement('p');
   id.classList.add('id');
   id.textContent = '#' + pokemonInfo.id;
-  console.log(pokemonInfo.id);
   row1.appendChild(id);
 
   half1.appendChild(row1);
@@ -367,64 +331,50 @@ function renderTeam(pokemonInfo) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const $poke0 = document.querySelector('#poke1');
-  const $poke1 = document.querySelector('#poke2');
-  const $poke2 = document.querySelector('#poke3');
-  const $poke3 = document.querySelector('#poke4');
-  const $poke4 = document.querySelector('#poke5');
-  const $poke5 = document.querySelector('#poke6');
+  const $pokeContainer = document.querySelector('.pokeTeam');
 
   if (storedPokemonInfo) {
-    $poke0.appendChild(renderTeam(storedPokemonInfo[0]));
-    $poke1.appendChild(renderTeam(storedPokemonInfo[1]));
-    $poke2.appendChild(renderTeam(storedPokemonInfo[2]));
-    $poke3.appendChild(renderTeam(storedPokemonInfo[3]));
-    $poke4.appendChild(renderTeam(storedPokemonInfo[4]));
-    $poke5.appendChild(renderTeam(storedPokemonInfo[5]));
+    storedPokemonInfo.forEach(function (pokemonInfo, index) {
+      const pokeId = `poke${index + 1}`;
+      const $pokeElement = renderTeam(pokemonInfo);
+      const $pokeDiv = document.getElementById(pokeId);
+      const emptyID = `empty${index + 1}`;
+      const $empty = document.getElementById(emptyID);
+
+      // Check if the div with the corresponding ID exists
+      if ($pokeDiv) {
+        $pokeDiv.appendChild($pokeElement);
+        $empty.classList.add('hidden');
+      }
+    });
   }
 
-  const hpValue = document.querySelector('.hp-number').textContent;
-  const attValue = document.querySelector('.att-number').textContent;
-  const defValue = document.querySelector('.def-number').textContent;
-  const spaValue = document.querySelector('.spa-number').textContent;
-  const spdValue = document.querySelector('.spd-number').textContent;
-  const speValue = document.querySelector('.spe-number').textContent;
-  const maxStat = 255;
-  console.log(speValue);
-  const hpPercent = (hpValue / maxStat) * 100;
-  const attPercent = (attValue / maxStat) * 100;
-  const defPercent = (defValue / maxStat) * 100;
-  const spaPercent = (spaValue / maxStat) * 100;
-  const spdPercent = (spdValue / maxStat) * 100;
-  const spePercent = (speValue / maxStat) * 100;
+  // Rest of your code...
 
-  // Set width for HP
-  document.querySelectorAll('.hp-percent').forEach(function (element) {
-    element.style.width = hpPercent + '%';
-  });
+  function setStatWidth(statValues, percentClass) {
+    const maxStat = 255;
 
-  // Set width for other stats
-  document.querySelectorAll('.att-percent').forEach(function (element) {
-    element.style.width = attPercent + '%';
-  });
+    statValues.forEach(function (statValue, index) {
+      const value = parseInt(statValue.textContent);
+      const percent = (value / maxStat) * 100;
+      document.querySelectorAll(`.${percentClass}`)[index].style.width =
+        percent + '%';
+    });
+  }
 
-  document.querySelectorAll('.def-percent').forEach(function (element) {
-    element.style.width = defPercent + '%';
-  });
+  const hpValues = document.querySelectorAll('.hp-number');
+  const attValues = document.querySelectorAll('.att-number');
+  const defValues = document.querySelectorAll('.def-number');
+  const spaValues = document.querySelectorAll('.spa-number');
+  const spdValues = document.querySelectorAll('.spd-number');
+  const speValues = document.querySelectorAll('.spe-number');
 
-  document.querySelectorAll('.spa-percent').forEach(function (element) {
-    element.style.width = spaPercent + '%';
-  });
-
-  document.querySelectorAll('.spd-percent').forEach(function (element) {
-    element.style.width = spdPercent + '%';
-  });
-
-  document.querySelectorAll('.spe-percent').forEach(function (element) {
-    element.style.width = spePercent + '%';
-  });
-
-  const $genderSwitch = document.querySelectorAll('.gender');
+  setStatWidth(hpValues, 'hp-percent');
+  setStatWidth(attValues, 'att-percent');
+  setStatWidth(defValues, 'def-percent');
+  setStatWidth(spaValues, 'spa-percent');
+  setStatWidth(spdValues, 'spd-percent');
+  setStatWidth(speValues, 'spe-percent');
 
   const $genderSwitches = document.querySelectorAll('.gender');
   $genderSwitches.forEach(function ($genderSwitch) {
@@ -433,5 +383,17 @@ document.addEventListener('DOMContentLoaded', function () {
       $genderSwitch.textContent =
         $genderSwitch.textContent === '♂' ? '♀' : '♂';
     });
+  });
+  const $typebox1Array = document.querySelectorAll('.type-box-1');
+  const $typebox2Array = document.querySelectorAll('.type-box-2');
+
+  $typebox1Array.forEach(function ($typebox1, index) {
+    const $typebox2 = $typebox2Array[index];
+
+    if ($typebox1.textContent === $typebox2.textContent) {
+      $typebox2.classList.add('hidden');
+      $typebox1.style.width = '100%';
+      $typebox1.style.letterSpacing = '2px';
+    }
   });
 });

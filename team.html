@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header">
+        <a href="./index.html">
+          <img class="pokedex-img" src="images/pokedex.webp" />
+        </a>
+        <h1 class="headerText">
+          Pok&eacute;mon<br />
+          Team<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builder
+        </h1>
+        <img class="pokeballHeader" src="images/pokeball.png" />
+      </div>
+    </header>
+    <main>
+      <form>
+        <div class="update-button-container">
+          <button class="update-button" type="button">Update</button>
+        </div>
+      </form>
+      <div class="pokeTeam">
+        <div class="row">
+          <div class="poke" id="poke1">
+            <p class="empty" id="empty1">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+          <div class="poke" id="poke2">
+            <p class="empty" id="empty2">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="poke" id="poke3">
+            <p class="empty" id="empty3">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+          <div class="poke" id="poke4">
+            <p class="empty" id="empty4">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="poke" id="poke5">
+            <p class="empty" id="empty5">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+          <div class="poke" id="poke6">
+            <p class="empty" id="empty6">
+              This spot is empty!<br />
+              Go catch somthing!!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-box hidden">
+        <div class="modal-box-flex">
+          <div class="modal">
+            <p class="modalText">All right! (pokemon) was caught!</p>
+            <button class="okayButton">Okay!</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/team.js"></script>
+  </body>
+</html>

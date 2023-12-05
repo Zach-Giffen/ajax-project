@@ -40,6 +40,27 @@ function getAllPokemonNames(pokemonName, callback) {
   xhr.send();
 }
 
+function getAllPokemonDetails(pokemonName, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + pokemonName);
+  xhr.responseType = 'json';
+
+  xhr.addEventListener('load', function () {
+    if (xhr.status === 200) {
+      const responseData = xhr.response;
+      callback(responseData);
+    } else {
+      console.error('Request failed with status:', xhr.status);
+    }
+  });
+
+  xhr.addEventListener('error', function () {
+    console.error('Request failed');
+  });
+
+  xhr.send();
+}
+
 function renderTable(pokemon) {
   const $tableRow = document.createElement('tr');
 
@@ -262,6 +283,12 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedResponses.forEach((response) => {
           pokedexTable.appendChild(renderTable(response.details));
         });
+
+        const allPokeballDexElements =
+          document.querySelectorAll('.pokeball-dex');
+        allPokeballDexElements.forEach(function (pokeballDex) {
+          pokeballDex.addEventListener('click', addPokemon);
+        });
       })
       .catch((error) => {
         console.error('Error fetching Pokemon details:', error);
@@ -303,3 +330,64 @@ function filter() {
 }
 
 $filterButton.addEventListener('click', filter);
+const $modalText = document.querySelector('modalText');
+
+function addPokemon() {
+  const $clickedPokemonRow = event.target.closest('tr');
+  const $modalText = document.querySelector('.modalText');
+  console.log($modalText);
+
+  if ($clickedPokemonRow) {
+    const pokemonName =
+      $clickedPokemonRow.querySelector('.table-name').textContent;
+
+    // Get additional details using the API
+    getAllPokemonDetails(pokemonName, function (pokemonDetails) {
+      // Get existing data from local storage or initialize an empty array
+      const existingPokemonData =
+        JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+
+      if (existingPokemonData.length < 6) {
+        const pokemonInfo = {
+          name: pokemonDetails.name,
+          id: pokemonDetails.id,
+          abilities: pokemonDetails.abilities,
+          moves: pokemonDetails.moves,
+          sprite: pokemonDetails.sprites.other.dream_world.front_default,
+          types: pokemonDetails.types,
+          stats: pokemonDetails.stats,
+          // Add more properties as needed
+        };
+
+        $modalText.textContent =
+          'All right! ' + pokemonDetails.name + ' was caught!';
+
+        // Add the new Pokémon to the existing data array
+        existingPokemonData.push(pokemonInfo);
+
+        // Store the updated array in local storage
+        localStorage.setItem(
+          'selectedPokemon',
+          JSON.stringify(existingPokemonData),
+        );
+      } else {
+        $modalText.textContent = 'Oh, no! The Pokémon broke free!';
+      }
+    });
+  }
+
+  const $modalBox = document.querySelector('.modal-box');
+  if ($modalBox.classList.contains('hidden')) {
+    $modalBox.classList.remove('hidden');
+  } else {
+    $modalBox.classList.add('hidden');
+  }
+}
+
+function closeModal() {
+  const $modalBox = document.querySelector('.modal-box');
+  $modalBox.classList.add('hidden');
+}
+
+const $okay = document.querySelector('.okayButton');
+$okay.addEventListener('click', closeModal);

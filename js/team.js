@@ -333,6 +333,10 @@ function renderTeam(pokemonInfo) {
 document.addEventListener('DOMContentLoaded', function () {
   const $pokeContainer = document.querySelector('.pokeTeam');
 
+  const storedPokemonInfo =
+    JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+
+  // Render initial Pokémon data
   if (storedPokemonInfo) {
     storedPokemonInfo.forEach(function (pokemonInfo, index) {
       const pokeId = `poke${index + 1}`;
@@ -384,6 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $genderSwitch.textContent === '♂' ? '♀' : '♂';
     });
   });
+
   const $typebox1Array = document.querySelectorAll('.type-box-1');
   const $typebox2Array = document.querySelectorAll('.type-box-2');
 
@@ -395,5 +400,25 @@ document.addEventListener('DOMContentLoaded', function () {
       $typebox1.style.width = '100%';
       $typebox1.style.letterSpacing = '2px';
     }
+  });
+
+  const $deleteButtons = document.querySelectorAll('.delete');
+
+  $deleteButtons.forEach(function ($deleteButton, index) {
+    $deleteButton.addEventListener('click', function () {
+      // Specify the index to remove (use the current index)
+      const indexToRemove = index;
+
+      // If the index is valid, remove the item and save the updated array back to local storage
+      if (indexToRemove >= 0 && indexToRemove < storedPokemonInfo.length) {
+        storedPokemonInfo.splice(indexToRemove, 1);
+        localStorage.setItem(
+          'selectedPokemon',
+          JSON.stringify(storedPokemonInfo),
+        );
+
+        location.reload();
+      }
+    });
   });
 });

@@ -333,6 +333,9 @@ function renderTeam(pokemonInfo) {
 document.addEventListener('DOMContentLoaded', function () {
   const $pokeContainer = document.querySelector('.pokeTeam');
 
+  const storedPokemonInfo =
+    JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+
   if (storedPokemonInfo) {
     storedPokemonInfo.forEach(function (pokemonInfo, index) {
       const pokeId = `poke${index + 1}`;
@@ -341,15 +344,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const emptyID = `empty${index + 1}`;
       const $empty = document.getElementById(emptyID);
 
-      // Check if the div with the corresponding ID exists
       if ($pokeDiv) {
         $pokeDiv.appendChild($pokeElement);
         $empty.classList.add('hidden');
       }
     });
   }
-
-  // Rest of your code...
 
   function setStatWidth(statValues, percentClass) {
     const maxStat = 255;
@@ -379,11 +379,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const $genderSwitches = document.querySelectorAll('.gender');
   $genderSwitches.forEach(function ($genderSwitch) {
     $genderSwitch.addEventListener('click', function () {
-      // Toggle between '♂' and '♀'
       $genderSwitch.textContent =
         $genderSwitch.textContent === '♂' ? '♀' : '♂';
     });
   });
+
   const $typebox1Array = document.querySelectorAll('.type-box-1');
   const $typebox2Array = document.querySelectorAll('.type-box-2');
 
@@ -395,5 +395,23 @@ document.addEventListener('DOMContentLoaded', function () {
       $typebox1.style.width = '100%';
       $typebox1.style.letterSpacing = '2px';
     }
+  });
+
+  const $deleteButtons = document.querySelectorAll('.delete');
+
+  $deleteButtons.forEach(function ($deleteButton, index) {
+    $deleteButton.addEventListener('click', function () {
+      const indexToRemove = index;
+
+      if (indexToRemove >= 0 && indexToRemove < storedPokemonInfo.length) {
+        storedPokemonInfo.splice(indexToRemove, 1);
+        localStorage.setItem(
+          'selectedPokemon',
+          JSON.stringify(storedPokemonInfo),
+        );
+
+        location.reload();
+      }
+    });
   });
 });

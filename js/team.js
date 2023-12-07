@@ -332,9 +332,34 @@ function renderTeam(pokemonInfo) {
 
 document.addEventListener('DOMContentLoaded', function () {
   const $pokeContainer = document.querySelector('.pokeTeam');
+  const $updateButton = document.querySelector('.update-button');
+  const $name = document.querySelectorAll('.name');
 
-  const storedPokemonInfo =
-    JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+  $updateButton.addEventListener('click', function () {
+    // Step 1: Retrieve existing data
+    const storedPokemonInfoString = localStorage.getItem('selectedPokemon');
+    const storedPokemonInfo = JSON.parse(storedPokemonInfoString) || [];
+
+    // Step 2: Update all entries in the data
+    const $nameInputs = document.querySelectorAll('.name');
+
+    for (
+      let i = 0;
+      i < Math.min(6, storedPokemonInfo.length, $nameInputs.length);
+      i++
+    ) {
+      storedPokemonInfo[i].name = $nameInputs[i].value;
+      // Update other properties as needed
+    }
+
+    // Step 3: Save the updated data back to local storage
+    localStorage.setItem('selectedPokemon', JSON.stringify(storedPokemonInfo));
+
+    // Additional code here, if needed
+  });
+
+  // const storedPokemonInfo =
+  //   JSON.parse(localStorage.getItem('selectedPokemon')) || [];
 
   if (storedPokemonInfo) {
     storedPokemonInfo.forEach(function (pokemonInfo, index) {

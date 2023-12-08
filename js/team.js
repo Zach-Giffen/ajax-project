@@ -332,9 +332,42 @@ function renderTeam(pokemonInfo) {
 
 document.addEventListener('DOMContentLoaded', function () {
   const $pokeContainer = document.querySelector('.pokeTeam');
+  const $updateButton = document.querySelector('.update-button');
 
-  const storedPokemonInfo =
-    JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+  $updateButton.addEventListener('click', function () {
+    // Step 1: Retrieve existing data
+    const storedPokemonInfoString = localStorage.getItem('selectedPokemon');
+    const storedPokemonInfo = JSON.parse(storedPokemonInfoString) || [];
+
+    // Step 2: Update all entries in the data
+    const $nameInputs = document.querySelectorAll('.name');
+    const $gender = document.querySelectorAll('.gender');
+
+    for (
+      let i = 0;
+      i <
+      Math.min(6, storedPokemonInfo.length, $nameInputs.length, $gender.length);
+      i++
+    ) {
+      storedPokemonInfo[i].name = $nameInputs[i].value;
+      // Update other properties as needed
+    }
+
+    // Step 3: Save the updated data back to local storage
+    localStorage.setItem('selectedPokemon', JSON.stringify(storedPokemonInfo));
+
+    // Store all gender values under one object in local storage
+    const genderObject = {};
+    for (let i = 0; i < $gender.length; i++) {
+      genderObject[`gender_${i + 1}`] = $gender[i].textContent;
+    }
+    localStorage.setItem('genderStat', JSON.stringify(genderObject));
+
+    // Additional code here, if needed
+  });
+
+  // const storedPokemonInfo =
+  //   JSON.parse(localStorage.getItem('selectedPokemon')) || [];
 
   if (storedPokemonInfo) {
     storedPokemonInfo.forEach(function (pokemonInfo, index) {
@@ -404,6 +437,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const indexToRemove = index;
 
       if (indexToRemove >= 0 && indexToRemove < storedPokemonInfo.length) {
+        // Remove the corresponding gender information
+        const genderKeyToRemove = `gender_${indexToRemove + 1}`;
+        localStorage.removeItem(genderKeyToRemove);
+
+        // Remove the Pokemon entry
         storedPokemonInfo.splice(indexToRemove, 1);
         localStorage.setItem(
           'selectedPokemon',
